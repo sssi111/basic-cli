@@ -1,8 +1,9 @@
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from io import StringIO
 import sys
 from src.manager import CLIManager
+
 
 class TestCLIManager(unittest.TestCase):
     def setUp(self):

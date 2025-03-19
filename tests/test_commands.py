@@ -3,7 +3,12 @@ import os
 import tempfile
 import io
 from unittest.mock import patch
-from src.commands import *
+from src.commands import (
+    EchoCommand, CatCommand, WcCommand, PwdCommand,
+    ExitCommand, DefaultCommand, ExitCommandException
+)
+from src.parser import ParsedCommand
+
 
 class TestCommands(unittest.TestCase):
     def setUp(self):
@@ -53,17 +58,21 @@ class TestCommands(unittest.TestCase):
         cmd = ExitCommand()
         with self.assertRaises(ExitCommandException):
             cmd.execute(ParsedCommand("exit", []))
-            
+
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_default_command(self, mock_stdout):
         cmd = DefaultCommand()
-        exit_code = cmd.execute(ParsedCommand("head", [self.temp_file.name, "-n", "1"]))
+        exit_code = cmd.execute(ParsedCommand(
+            "head", [self.temp_file.name, "-n", "1"]
+        ))
         self.assertEqual(exit_code, 0)
-        self.assertEqual(mock_stdout.getvalue().strip(), "line1")  
-        
+        self.assertEqual(mock_stdout.getvalue().strip(), "line1")
+
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_other_default_command(self, mock_stdout):
         cmd = DefaultCommand()
-        exit_code = cmd.execute(ParsedCommand("tail", [self.temp_file.name, "-n", "1"]))
+        exit_code = cmd.execute(ParsedCommand(
+            "tail", [self.temp_file.name, "-n", "1"]
+        ))
         self.assertEqual(exit_code, 0)
-        self.assertEqual(mock_stdout.getvalue().strip(), "line3")  
+        self.assertEqual(mock_stdout.getvalue().strip(), "line3")
