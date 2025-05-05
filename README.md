@@ -1,2 +1,31 @@
-# cli
-Homework 2. A basic CLI interpreter that supports some unix commands
+# basic-cli
+
+Простой простой интерпретатор командной строки (CLI)
+
+## Авторы
+
+* Поволоцкий Роман [romanpovol](https://github.com/romanpovol)
+* Новицкий Григорий [GrigoriyNovitskiy](https://github.com/GrigoriyNovitskiy)
+* Филатов Юрий [YuriiFilatov](https://github.com/YuriiFilatov)
+
+## Описание
+
+### Команды
+
+* `cat [FILE]` — вывести на экран содержимое файла
+* `echo` — вывести на экран свой аргумент (или аргументы)
+* `wc [FILE]` — вывести количество строк, слов и байт в файле
+* `pwd` — распечатать текущую директорию
+* `exit` — выйти из интерпретатора
+* Если введенная команда не известна интерпретатору, то она вызывается как внешняя программа
+
+### Поддерживаемые функции
+
+* Одинарные и двойные кавычки (full and weak quoting)
+* Окружение (команды вида “имя=значение”), оператор $
+* Пайплайны (оператор “|”)
+
+### Запуск CLI и тестов
+
+* `python -m src.main` - запуск CLI
+* `python -m unittest discover -v -s tests` - запуск тестов
